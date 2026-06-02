@@ -156,8 +156,9 @@ Sistem berhasil:
 ## 👨‍💻 Pengembang
 
 **Akmal Yusril Fani**  
+**Rayhan Khadafi**
 Teknik Informatika  
-Universitas Langlangbuana
+Universitas Teknologi Bandung
 
 ## 📚 Mata Kuliah
 
