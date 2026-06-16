@@ -1,94 +1,94 @@
-# 🌱 Smart Greenhouse
+# 📋 Smart Attendance System
 
-Sistem Smart Greenhouse berbasis mikrokontroler yang dirancang untuk melakukan monitoring dan pengendalian kondisi lingkungan tanaman secara otomatis. Sistem ini memanfaatkan sensor untuk membaca suhu, kelembaban udara, dan kelembaban tanah, kemudian mengaktifkan perangkat seperti pompa air dan kipas sesuai kondisi yang terdeteksi.
+Sistem Absensi Otomatis berbasis ESP32 yang dirancang untuk melakukan pencatatan kehadiran secara digital dan mengirimkan data absensi secara otomatis ke Google Spreadsheet melalui koneksi internet. Sistem ini memanfaatkan teknologi IoT untuk mempermudah proses rekapitulasi data kehadiran secara real-time.
 
 ## 📌 Latar Belakang
 
-Perawatan tanaman secara manual sering kali kurang efisien karena membutuhkan pemantauan yang terus-menerus. Dengan memanfaatkan teknologi mikrokontroler, proses monitoring dan pengendalian lingkungan tanaman dapat dilakukan secara otomatis sehingga membantu menjaga kondisi pertumbuhan tanaman tetap optimal.
+Proses absensi secara manual masih banyak digunakan dan sering menimbulkan masalah seperti kehilangan data, kesalahan pencatatan, serta membutuhkan waktu yang lebih lama untuk melakukan rekapitulasi. Dengan memanfaatkan teknologi Internet of Things (IoT), proses absensi dapat dilakukan secara otomatis dan data langsung tersimpan ke Google Spreadsheet sehingga lebih efisien, akurat, dan mudah diakses.
 
 ## 🎯 Tujuan
 
-- Memonitor suhu dan kelembaban udara secara real-time.
-- Memonitor tingkat kelembaban tanah.
-- Mengotomatisasi proses penyiraman tanaman.
-- Mengontrol suhu lingkungan greenhouse menggunakan kipas.
-- Mengimplementasikan konsep Internet of Things (IoT) dan Smart Farming.
+* Mengotomatisasi proses pencatatan kehadiran.
+* Menyimpan data absensi secara real-time ke Google Spreadsheet.
+* Mengurangi kesalahan pencatatan absensi manual.
+* Mempermudah pengelolaan dan rekapitulasi data kehadiran.
+* Mengimplementasikan teknologi IoT pada sistem absensi.
 
 ## ⚙️ Fitur Sistem
 
-- Monitoring suhu dan kelembaban udara.
-- Monitoring kelembaban tanah.
-- Penyiraman tanaman otomatis.
-- Kontrol kipas otomatis berdasarkan suhu.
-- Tampilan data sensor secara real-time.
-- Sistem bekerja tanpa intervensi pengguna.
+* Absensi otomatis menggunakan RFID atau Fingerprint.
+* Pengiriman data ke Google Spreadsheet secara real-time.
+* Penyimpanan data berbasis cloud.
+* Monitoring data kehadiran secara online.
+* Rekap data absensi otomatis.
+* Sistem bekerja secara cepat dan akurat.
 
 ## 🛠️ Komponen Hardware
 
-| No | Komponen | Jumlah |
-|----|-----------|---------|
-| 1 | ESP32 / Arduino Uno | 1 |
-| 2 | Sensor DHT11/DHT22 | 1 |
-| 3 | Sensor Soil Moisture | 1 |
-| 4 | Relay Module | 1-2 |
-| 5 | Mini Water Pump | 1 |
-| 6 | Kipas DC | 1 |
-| 7 | Breadboard | 1 |
-| 8 | Kabel Jumper | Secukupnya |
-| 9 | Power Supply | 1 |
+| No | Komponen                        | Jumlah     |
+| -- | ------------------------------- | ---------- |
+| 1  | ESP32                           | 1          |
+| 2  | RFID RC522 / Fingerprint Sensor | 1          |
+| 3  | LCD I2C 16x2                    | 1          |
+| 4  | Buzzer                          | 1          |
+| 5  | LED Indikator                   | 2          |
+| 6  | Kabel Jumper                    | Secukupnya |
+| 7  | Breadboard                      | 1          |
+| 8  | Power Supply                    | 1          |
+
+## 💻 Komponen Software
+
+* Arduino IDE
+* Google Spreadsheet
+* Google Apps Script
+* Library ESP32
+* Library RFID/Fingerprint
 
 ## 🔧 Cara Kerja Sistem
 
-1. Sensor DHT membaca suhu dan kelembaban udara.
-2. Sensor Soil Moisture membaca kelembaban tanah.
-3. Data sensor diproses oleh mikrokontroler.
-4. Jika kelembaban tanah berada di bawah batas minimum, pompa air akan menyala otomatis.
-5. Jika suhu melebihi batas yang ditentukan, kipas akan aktif.
-6. Data kondisi greenhouse ditampilkan secara real-time.
+1. Pengguna melakukan absensi menggunakan kartu RFID atau sensor fingerprint.
+2. ESP32 membaca ID pengguna.
+3. Data pengguna diverifikasi.
+4. Sistem mencatat waktu absensi.
+5. Data dikirim melalui WiFi ke Google Apps Script.
+6. Google Apps Script menyimpan data ke Google Spreadsheet.
+7. Status absensi ditampilkan pada LCD.
 
 ## 📊 Diagram Sistem
 
 ```text
-          +----------------+
-          | Sensor DHT11   |
-          +-------+--------+
-                  |
-                  v
-          +----------------+
-          |     ESP32      |
-          +-------+--------+
-                  ^
-                  |
-          +-------+--------+
-          | Soil Moisture  |
-          +----------------+
-
-                  |
-                  v
-
-         +------------------+
-         | Decision System  |
-         +--------+---------+
-                  |
-        +---------+---------+
-        |                   |
-        v                   v
- +-------------+     +-------------+
- | Water Pump  |     | Cooling Fan |
- +-------------+     +-------------+
++------------------+
+| RFID/Fingerprint |
++---------+--------+
+          |
+          v
++------------------+
+|      ESP32       |
++---------+--------+
+          |
+          | WiFi
+          v
++------------------+
+| Google Apps Script|
++---------+--------+
+          |
+          v
++------------------+
+| Google Spreadsheet|
++------------------+
 ```
 
 ## 📂 Struktur Project
 
 ```text
-Smart-Greenhouse/
+Smart-Attendance-System/
 │
 ├── src/
-│   └── smart_greenhouse.ino
+│   └── attendance_system.ino
 │
 ├── docs/
 │   ├── wiring_diagram.png
-│   ├── greenhouse_design.jpg
+│   ├── flowchart.png
 │   └── testing_result.pdf
 │
 ├── assets/
@@ -101,68 +101,81 @@ Smart-Greenhouse/
 
 ### Software
 
-- Arduino IDE
-- Driver ESP32 (jika menggunakan ESP32)
+* Arduino IDE
+* Driver ESP32
 
 ### Library
 
 ```cpp
-DHT.h
-Adafruit Sensor.h
+WiFi.h
+HTTPClient.h
+SPI.h
+MFRC522.h
 LiquidCrystal_I2C.h
 ```
 
 Instal library melalui:
 
-```
+```text
 Sketch → Include Library → Manage Libraries
 ```
 
 ## ▶️ Menjalankan Program
 
-1. Hubungkan board ESP32/Arduino ke komputer.
+1. Hubungkan ESP32 ke komputer.
 2. Buka file program pada Arduino IDE.
-3. Pilih board yang sesuai.
-4. Pilih port yang terhubung.
-5. Klik Upload.
-6. Amati data sensor pada LCD atau Serial Monitor.
+3. Install seluruh library yang dibutuhkan.
+4. Masukkan SSID dan Password WiFi.
+5. Masukkan URL Google Apps Script.
+6. Upload program ke ESP32.
+7. Tempelkan kartu RFID atau gunakan fingerprint untuk melakukan absensi.
+8. Data akan otomatis tersimpan pada Google Spreadsheet.
 
 ## 🧪 Pengujian
 
-### Pengujian Sensor Tanah
+### Pengujian RFID/Fingerprint
 
-| Kondisi Tanah | Status Pompa |
-|--------------|-------------|
-| Kering | ON |
-| Lembab | OFF |
+| Kondisi            | Hasil            |
+| ------------------ | ---------------- |
+| ID Terdaftar       | Absensi Berhasil |
+| ID Tidak Terdaftar | Absensi Ditolak  |
 
-### Pengujian Suhu
+### Pengujian Koneksi Internet
 
-| Suhu | Status Kipas |
-|-------|-------------|
-| > 30°C | ON |
-| ≤ 30°C | OFF |
+| Kondisi        | Hasil               |
+| -------------- | ------------------- |
+| WiFi Terhubung | Data Terkirim       |
+| WiFi Terputus  | Data Gagal Terkirim |
 
 ## 📈 Hasil
 
 Sistem berhasil:
 
-- Membaca suhu dan kelembaban udara secara real-time.
-- Membaca kelembaban tanah dengan baik.
-- Menyalakan pompa otomatis saat tanah kering.
-- Menyalakan kipas otomatis saat suhu tinggi.
-- Membantu menjaga kondisi lingkungan tanaman tetap optimal.
+* Membaca data RFID/Fingerprint dengan baik.
+* Mengirimkan data absensi ke Google Spreadsheet secara real-time.
+* Menyimpan data kehadiran secara otomatis.
+* Mempermudah proses monitoring dan rekapitulasi absensi.
+* Mengurangi penggunaan kertas dan pencatatan manual.
+
+## 📑 Format Data Google Spreadsheet
+
+| Nama              | ID  | Tanggal    | Jam Masuk |
+| ----------------- | --- | ---------- | --------- |
+| Akmal Yusril Fani | 001 | 16-06-2026 | 08:00:15  |
+| Rayhan Khadafi    | 002 | 16-06-2026 | 08:05:20  |
+| Harsya Vil'ardi   | 003 | 16-06-2026 | 08:05:25  |
 
 ## 👨‍💻 Pengembang
 
-**Akmal Yusril Fani**  
+**Akmal Yusril Fani**
 **Rayhan Khadafi**
-Teknik Informatika  
+**Harsya Vil'ardi**
+Teknik Informatika
 Universitas Teknologi Bandung
 
 ## 📚 Mata Kuliah
 
-**Sistem Mikrokontroler**  
+**Sistem Mikrokontroler**
 Ujian Akhir Semester (UAS)
 
 ## 📄 Lisensi
